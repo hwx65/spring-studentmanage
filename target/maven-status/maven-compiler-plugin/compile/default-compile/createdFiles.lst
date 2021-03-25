@@ -1,0 +1,5 @@
+org\springframework\samples\studentmanage\model\Student.class
+org\springframework\samples\studentmanage\controller\StudentController.class
+org\springframework\samples\studentmanage\controller\WelcomeController.class
+org\springframework\samples\studentmanage\repository\StudentRepository.class
+org\springframework\samples\studentmanage\StudentManageApplication.class

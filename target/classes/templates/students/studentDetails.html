@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html xmlns:th="https://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'students')}">
+
+<body>
+
+
+  <h2>Student Information</h2>
+
+
+  <table class="table table-striped" th:object="${student}">
+    <tr>
+      <th>Name</th>
+      <td><b th:text="*{stuname}"></b></td>
+    </tr>
+    <tr>
+      <th>Gender</th>
+      <td th:text="*{gender}" />
+      </td>
+    </tr>
+    <tr>
+      <th>Birth Date</th>
+      <td th:text="*{birthDate}" />
+      </dd>
+    </tr>
+    <tr>
+      <th>Hometown</th>
+      <td th:text="*{hometown}" />
+      </td>
+    </tr>
+    <tr>
+      <th>Academy</th>
+      <td th:text="*{academy}" />
+      </td>
+    </tr>
+    <tr>
+      <th>Studentnumber</th>
+      <td th:text="*{studentnumber}" />
+      </td>
+    </tr>
+  </table>
+
+  <a th:href="@{{id}/edit(id=${student.id})}" class="btn btn-default">Edit
+      Student</a>
+  <a th:href="@{{id}/delete(id=${student.id})}" class="btn btn-default">Delete
+      Student</a>
+ 
+  
+    <br />
+    <br />
+    <br />
+  
+  </body>
+
+</html>
