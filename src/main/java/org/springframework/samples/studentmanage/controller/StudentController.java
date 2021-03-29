@@ -6,7 +6,6 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.samples.studentmanage.model.Student;
-import org.springframework.samples.studentmanage.repository.StudentRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,17 +15,20 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.samples.studentmanage.service.StudentService;
 
 @Controller
 class StudentController {
 
 	private static final String VIEWS_STUDENT_CREATE_OR_UPDATE_FORM = "students/createOrUpdateStudentForm";
 
-	private final StudentRepository students;
+	private final StudentService studentService;
 
-	public StudentController(StudentRepository studentService) {
-		this.students = studentService;
-		// this.visits = visits;
+	@Autowired
+	public StudentController(StudentService studentService) {
+		this.studentService = studentService;
 	}
 
 	@InitBinder
@@ -47,7 +49,7 @@ class StudentController {
 			return VIEWS_STUDENT_CREATE_OR_UPDATE_FORM;
 		}
 		else {
-			this.students.save(student);
+			this.studentService.saveStudent(student);
 			return "redirect:/students/" + student.getId();
 		}
 	}
@@ -67,7 +69,7 @@ class StudentController {
 		}
 
 		// find students by stuname
-		Collection<Student> results = this.students.findByName(student.getStuname());
+		Collection<Student> results = this.studentService.findByName(student.getStuname());
 		if (results.isEmpty()) {
 			// no students found
 			result.rejectValue("stuname", "notFound", "not found");
@@ -87,7 +89,7 @@ class StudentController {
 
 	@GetMapping("/students/{studentId}/edit")
 	public String initUpdateStudentForm(@PathVariable("studentId") int studentId, Model model) {
-		Student student = this.students.findById(studentId);
+		Student student = this.studentService.findById(studentId);
 		model.addAttribute(student);
 		return VIEWS_STUDENT_CREATE_OR_UPDATE_FORM;
 	}
@@ -100,15 +102,15 @@ class StudentController {
 		}
 		else {
 			student.setId(studentId);
-			this.students.save(student);
+			this.studentService.saveStudent(student);
 			return "redirect:/students/{studentId}";
 		}
 	}
 
 	@GetMapping("/students/{studentId}/delete")
 	public String initDeleteStudentForm(@PathVariable("studentId") int studentId, Model model) {
-		Student student = this.students.findById(studentId);
-		this.students.delete(student);
+		Student student = this.studentService.findById(studentId);
+		this.studentService.deleteStudent(student);
 		return "redirect:/students/";
 	}
 
@@ -120,7 +122,7 @@ class StudentController {
 	@GetMapping("/students/{studentId}")
 	public ModelAndView showStudent(@PathVariable("studentId") int studentId) {
 		ModelAndView mav = new ModelAndView("students/studentDetails");
-		Student student = this.students.findById(studentId);
+		Student student = this.studentService.findById(studentId);
 		mav.addObject(student);
 		return mav;
 	}
