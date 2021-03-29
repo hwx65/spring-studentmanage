@@ -1,6 +1,6 @@
-/home/hwx/spring/spring-studentmanage/src/main/java/org/springframework/samples/studentmanage/controller/WelcomeController.java
-/home/hwx/spring/spring-studentmanage/src/main/java/org/springframework/samples/studentmanage/repository/StudentRepository.java
-/home/hwx/spring/spring-studentmanage/src/main/java/org/springframework/samples/studentmanage/StudentManageApplication.java
-/home/hwx/spring/spring-studentmanage/src/main/java/org/springframework/samples/studentmanage/model/Student.java
-/home/hwx/spring/spring-studentmanage/src/main/java/org/springframework/samples/studentmanage/service/StudentService.java
-/home/hwx/spring/spring-studentmanage/src/main/java/org/springframework/samples/studentmanage/controller/StudentController.java
+/home/hwx/spring-studentmanage/src/main/java/org/springframework/samples/studentmanage/service/StudentService.java
+/home/hwx/spring-studentmanage/src/main/java/org/springframework/samples/studentmanage/controller/WelcomeController.java
+/home/hwx/spring-studentmanage/src/main/java/org/springframework/samples/studentmanage/model/Student.java
+/home/hwx/spring-studentmanage/src/main/java/org/springframework/samples/studentmanage/repository/StudentRepository.java
+/home/hwx/spring-studentmanage/src/main/java/org/springframework/samples/studentmanage/StudentManageApplication.java
+/home/hwx/spring-studentmanage/src/main/java/org/springframework/samples/studentmanage/controller/StudentController.java
