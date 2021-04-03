@@ -2,7 +2,46 @@
 
 
 
-* 数据库中预先存储了大约3000条数据，压力测试任务为查询所有名字B开头的学生
+### 运行
+
+指令
+
+```
+./mvnw spring-boot:run
+```
+
+如果出现报错，则根据提示执行
+
+```
+mvn spring-javaformat:apply
+```
+
+访问：http://localhost:8080/
+
+
+
+### 作业二
+
+在本次实验中，我先是对项目做了以下更改：
+
+1. 更改查询方式，之前只支持用名字来查询，现在支持用多个属性来查询：
+
+   ```mysql
+   SELECT DISTINCT student FROM Student student WHERE student.stuname LIKE :stuname% and student.gender LIKE :gender% and student.hometown LIKE :hometown% and student.academy LIKE :academy%
+   ```
+
+2. 数据库中预先存储了大约3000条随机生成的学生信息，压力测试中使用的查询语句为：
+
+   ```scala
+   http://localhost:8080/students?stuname=M&gender=female&hometown=shanghai&academy=sociology
+   ```
+
+3. 增加service模块，方便加入redis缓存配置
+
+
+
+压力测试实验配置：
+
 * atOnceUsers = 100
 * 配置为：2个或者4个节点，有cache或者无cache，共四种，其中每个节点有0.5个cpu
 * 每种配置下运行gatling五次，取每次运行结果中的`mean response time`，最后再对这5次的结果取平均

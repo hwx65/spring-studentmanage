@@ -67,9 +67,21 @@ class StudentController {
 		if (student.getStuname() == null) {
 			student.setStuname(""); // empty string signifies broadest possible search
 		}
+		if (student.getGender() == null) {
+			student.setGender(""); // empty string signifies broadest possible search
+		}
+
+		if (student.getHometown() == null) {
+			student.setHometown(""); // empty string signifies broadest possible search
+		}
+
+		if (student.getAcademy() == null) {
+			student.setAcademy(""); // empty string signifies broadest possible search
+		}
 
 		// find students by stuname
-		Collection<Student> results = this.studentService.findByName(student.getStuname());
+		Collection<Student> results = this.studentService.findStudent(student.getStuname(), student.getGender(),
+				student.getHometown(), student.getAcademy());
 		if (results.isEmpty()) {
 			// no students found
 			result.rejectValue("stuname", "notFound", "not found");

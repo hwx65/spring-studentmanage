@@ -27,9 +27,9 @@ public class StudentService {
 		return studentRepository.findById(id);
 	}
 
-	@Cacheable(value = "find_students", key = "#stuname")
-	public Collection<Student> findByName(String stuname) {
-		return studentRepository.findByName(stuname);
+	@Cacheable(value = "find_students", key = "#stuname+'-'+#gender+'-'+#hometown+'-'+#academy")
+	public Collection<Student> findStudent(String stuname, String gender, String hometown, String academy) {
+		return studentRepository.findStudent(stuname, gender, hometown, academy);
 	}
 
 	@CacheEvict(value = "all_student", allEntries = true)
