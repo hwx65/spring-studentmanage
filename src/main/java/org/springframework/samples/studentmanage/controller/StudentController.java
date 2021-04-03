@@ -78,8 +78,8 @@ class StudentController {
 			student.setAcademy(""); // empty string signifies broadest possible search
 		}
 
-		Collection<Student> results = this.students.findStudent(student.getStuname(),student.getGender(),
-		student.getHometown(), student.getAcademy());
+		Collection<Student> results = this.students.findStudent(student.getStuname(), student.getGender(),
+				student.getHometown(), student.getAcademy());
 		if (results.isEmpty()) {
 			// no students found
 			result.rejectValue("stuname", "notFound", "not found");
