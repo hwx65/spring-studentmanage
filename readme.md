@@ -48,18 +48,18 @@ mvn spring-javaformat:apply
 
 |        | 2个节点，无cache | 2个节点，有cache | 4个节点，无cache | 4个节点，有cache |
 | ------ | ---------------- | ---------------- | ---------------- | ---------------- |
-| 第一次 | 7390             | 1999             | 5779             | 1668             |
-| 第二次 | 6465             | 1997             | 6472             | 1504             |
-| 第三次 | 6656             | 1981             | 5029             | 1640             |
-| 第四次 | 6350             | 2061             | 4943             | 2036             |
-| 第五次 | 6378             | 1980             | 5345             | 2021             |
-| 平均   | 6647.8           | 2003.6           | 5513.6           | 1584             |
+| 第一次 | 22510            | 1828             | 14892            | 1398             |
+| 第二次 | 22255            | 1961             | 13389            | 1289             |
+| 第三次 | 19106            | 1720             | 13358            | 1323             |
+| 第四次 | 18549            | 1751             | 12153            | 1250             |
+| 第五次 | 18137            | 1586             | 11267            | 1155             |
+| 平均   | 20111.4          | 1769.2           | 13011.8          | 1283             |
+
+*详细输出见results文件夹*
 
 
 
-**结论**：使用cache可以在很大程度上提高系统性能。
-
-
+**结论**：使用cache可以在很大程度上提高系统性能，单从这个实验来看，使用cache要比扩展系统划算地多，但是在使用cache也满足不了用户需求的时候，当然仍然需要扩展节点。
 
 
 
@@ -108,7 +108,7 @@ class GatlingTestSimulation extends Simulation {
      val scn = scenario("Student Manage test")
     .exec(
       http("search request")
-        .get("/students?stuname=B")
+        .get("/students?stuname=M&gender=female&hometown=shanghai&academy=sociology")
     )
     setUp(scn.inject(atOnceUsers(200)).protocols(httpProtocol))
 }
