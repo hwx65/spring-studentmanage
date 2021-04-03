@@ -17,9 +17,10 @@ public interface StudentRepository extends Repository<Student, Integer> {
 	 * @return a Collection of matching {@link Student}s (or an empty Collection if none
 	 * found)
 	 */
-	@Query("SELECT DISTINCT student FROM Student student WHERE student.stuname LIKE :stuname%")
+	@Query("SELECT DISTINCT student FROM Student student WHERE student.stuname LIKE %:stuname% AND student.gender LIKE %:gender% AND student.hometown LIKE %:hometown% AND student.academy LIKE %:academy%")
 	@Transactional(readOnly = true)
-	Collection<Student> findByName(@Param("stuname") String stuname);
+	Collection<Student> findStudent(@Param("stuname") String stuname, @Param("gender") String gender,
+			@Param("hometown") String hometown, @Param("academy") String academy);
 
 	/**
 	 * Retrieve an {@link Student} from the data store by id.
