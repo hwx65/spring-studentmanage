@@ -14,7 +14,14 @@ import javax.validation.constraints.NotEmpty;
 import org.springframework.core.style.ToStringCreator;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
 @Entity
+@NoArgsConstructor()
+@AllArgsConstructor
 @Table(name = "students")
 public class Student implements Serializable {
 
