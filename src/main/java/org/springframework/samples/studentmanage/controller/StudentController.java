@@ -55,13 +55,13 @@ class StudentController {
 					.body(studentResource);
 		}
 		catch (URISyntaxException e) {
-			return ResponseEntity.badRequest().body("Unable to create" + student);
+			return ResponseEntity.badRequest().body("Unable to create" + student + e);
 		}
 	}
 
 	@GetMapping("/students/{studentId}")
-	ResponseEntity<EntityModel<Student>> findOne(@PathVariable int id) {
-		return repository.findById(id)
+	ResponseEntity<EntityModel<Student>> findOne(@PathVariable int studentId) {
+		return repository.findById(studentId)
 				.map(student -> EntityModel.of(student,
 						linkTo(methodOn(StudentController.class).findOne(student.getId())).withSelfRel(),
 						linkTo(methodOn(StudentController.class).findAll()).withRel("students")))
