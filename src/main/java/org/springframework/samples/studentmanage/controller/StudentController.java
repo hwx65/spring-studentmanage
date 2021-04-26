@@ -81,7 +81,7 @@ class StudentController {
 		Link newlyCreatedLink = linkTo(methodOn(StudentController.class).findOne(studentId)).withSelfRel();
 
 		try {
-			return ResponseEntity.noContent().location(new URI(newlyCreatedLink.getHref())).build();
+			return ResponseEntity.ok().location(new URI(newlyCreatedLink.getHref())).build();
 		}
 		catch (URISyntaxException e) {
 			return ResponseEntity.badRequest().body("Unable to update " + studentToUpdate);
