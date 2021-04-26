@@ -6,18 +6,22 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
+import org.springframework.hateoas.Link;
 import org.springframework.http.ResponseEntity;
 import org.springframework.samples.studentmanage.model.Student;
 import org.springframework.samples.studentmanage.repository.StudentRepository;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -66,6 +70,35 @@ class StudentController {
 						linkTo(methodOn(StudentController.class).findOne(student.getId())).withSelfRel(),
 						linkTo(methodOn(StudentController.class).findAll()).withRel("students")))
 				.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+	}
+
+	@PutMapping("/students/{studentId}")
+	ResponseEntity<?> updataStudent(@RequestBody Student student, @PathVariable int studentId) {
+		Student studentToUpdate = student;
+		studentToUpdate.setId(studentId);
+		repository.save(studentToUpdate);
+
+		Link newlyCreatedLink = linkTo(methodOn(StudentController.class).findOne(studentId)).withSelfRel();
+
+		try {
+			return ResponseEntity.noContent().location(new URI(newlyCreatedLink.getHref())).build();
+		}
+		catch (URISyntaxException e) {
+			return ResponseEntity.badRequest().body("Unable to update " + studentToUpdate);
+		}
+
+	}
+
+	@DeleteMapping("/students/{studentId}")
+	ResponseEntity<?> deleteStudent(@PathVariable int studentId) {
+		Optional<Student> findstudent = repository.findById(studentId);
+		if (!findstudent.isPresent()) {
+			return ResponseEntity.badRequest().body("No studundet have id: " + studentId);
+		}
+		else {
+			repository.deleteById(studentId);
+			return ResponseEntity.ok().body("Successfully detele");
+		}
 	}
 
 }
