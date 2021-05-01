@@ -8,12 +8,11 @@ import org.springframework.batch.core.configuration.annotation.EnableBatchProces
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
+import org.springframework.batch.extensions.excel.poi.PoiItemReader;
 import org.springframework.batch.item.ItemStreamReader;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilder;
-import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
-import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,14 +35,12 @@ public class BatchConfiguration {
 	// tag::readerwriterprocessor[]
 	@Bean
 	public ItemStreamReader<Student> reader() {
-		return new FlatFileItemReaderBuilder<Student>().name("StudentItemReader")
-				.resource(new ClassPathResource("student-info.csv")).delimited()
-				.names("id", "name", "academy", "phonenumber", "gender", "birthday")
-				.fieldSetMapper(new BeanWrapperFieldSetMapper<Student>() {
-					{
-						setTargetType(Student.class);
-					}
-				}).build();
+		PoiItemReader<Student> reader = new PoiItemReader<Student>();
+		reader.setResource(new ClassPathResource("./测试数据.xlsx"));
+		reader.setRowMapper(new RowMapperImpl());
+		reader.setLinesToSkip(1);
+
+		return reader;
 	}
 
 	@Bean

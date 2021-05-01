@@ -84,42 +84,43 @@ class StudentController {
 		}
 	}
 
-	@GetMapping("/students/{studentId}/edit")
-	public String initUpdateStudentForm(@PathVariable("studentId") String studentId, Model model) {
-		Student student = this.students.findById(studentId);
+	@GetMapping("/students/{id}/edit")
+	public String initUpdateStudentForm(@PathVariable("id") String id, Model model) {
+		Student student = this.students.findById(id);
 		model.addAttribute(student);
 		return VIEWS_STUDENT_CREATE_OR_UPDATE_FORM;
 	}
 
-	@PostMapping("/students/{studentId}/edit")
+	@PostMapping("/students/{id}/edit")
 	public String processUpdateStudentForm(@Valid Student student, BindingResult result,
-			@PathVariable("studentId") String studentId) {
+			@PathVariable("id") String id) {
 		if (result.hasErrors()) {
 			return VIEWS_STUDENT_CREATE_OR_UPDATE_FORM;
 		}
 		else {
-			student.setId(studentId);
+			if (!id.equals(student.getId())) {
+				this.students.delete(id);
+			}
 			this.students.save(student);
-			return "redirect:/students/{studentId}";
+			return "redirect:/students/" + student.getId();
 		}
 	}
 
-	@GetMapping("/students/{studentId}/delete")
-	public String initDeleteStudentForm(@PathVariable("studentId") String studentId, Model model) {
-		Student student = this.students.findById(studentId);
-		this.students.delete(student);
+	@GetMapping("/students/{id}/delete")
+	public String initDeleteStudentForm(@PathVariable("id") String id, Model model) {
+		this.students.delete(id);
 		return "redirect:/students/";
 	}
 
 	/**
 	 * Custom handler for displaying an student.
-	 * @param studentId the ID of the student to display
+	 * @param id the ID of the student to display
 	 * @return a ModelMap with the model attributes for the view
 	 */
-	@GetMapping("/students/{studentId}")
-	public ModelAndView showStudent(@PathVariable("studentId") String studentId) {
+	@GetMapping("/students/{id}")
+	public ModelAndView showStudent(@PathVariable("id") String id) {
 		ModelAndView mav = new ModelAndView("students/studentDetails");
-		Student student = this.students.findById(studentId);
+		Student student = this.students.findById(id);
 		mav.addObject(student);
 		return mav;
 	}

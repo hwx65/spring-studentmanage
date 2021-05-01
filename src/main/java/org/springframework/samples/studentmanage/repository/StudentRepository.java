@@ -2,6 +2,7 @@ package org.springframework.samples.studentmanage.repository;
 
 import java.util.Collection;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
@@ -20,6 +21,9 @@ public interface StudentRepository extends Repository<Student, Integer> {
 
 	void save(Student student);
 
-	void delete(Student student);
+	@Modifying
+	@Query("DELETE FROM Student student WHERE student.id = :id")
+	@Transactional
+	void delete(@Param("id") String id);
 
 }

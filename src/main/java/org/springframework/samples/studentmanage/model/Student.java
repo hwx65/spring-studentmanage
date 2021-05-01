@@ -21,9 +21,6 @@ public class Student implements Serializable {
 	@Column(name = "id")
 	private String id;
 
-	public Student() {
-	}
-
 	public String getId() {
 		return id;
 	}
@@ -45,7 +42,7 @@ public class Student implements Serializable {
 	private String gender;
 
 	@Column(name = "birthday")
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@NotEmpty
 	private String birthday;
 
 	@Column(name = "phonenumber")
