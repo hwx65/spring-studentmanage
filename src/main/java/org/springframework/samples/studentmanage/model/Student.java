@@ -1,6 +1,7 @@
 package org.springframework.samples.studentmanage.model;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -24,6 +25,18 @@ public class Student implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	public Student(int id, String name, String gender, Date birthday, String phonenumber, String acaedmy) {
+		this.id = id;
+		this.name = name;
+		this.gender = gender;
+		this.setBithday(bithday);
+		this.phonenumber = phonenumber;
+		this.academy = acaedmy;
+	}
+
+	public Student() {
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -36,36 +49,32 @@ public class Student implements Serializable {
 		return this.id == null;
 	}
 
-	@Column(name = "stuname")
+	@Column(name = "name")
 	@NotEmpty
-	private String stuname;
+	private String name;
 
 	@Column(name = "gender")
 	@NotEmpty
 	private String gender;
 
-	@Column(name = "birth_date")
+	@Column(name = "birthday")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate birthDate;
+	private LocalDate bithday;
 
-	@Column(name = "hometown")
+	@Column(name = "phonenumber")
 	@NotEmpty
-	private String hometown;
+	private String phonenumber;
 
 	@Column(name = "academy")
 	@NotEmpty
 	private String academy;
 
-	@Column(name = "studentnumber")
-	@NotEmpty
-	private String studentnumber;
-
-	public String getStuname() {
-		return this.stuname;
+	public String getName() {
+		return name;
 	}
 
-	public void setStuname(String stuname) {
-		this.stuname = stuname;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getGender() {
@@ -76,20 +85,20 @@ public class Student implements Serializable {
 		this.gender = gender;
 	}
 
-	public void setBirthDate(LocalDate birthDate) {
-		this.birthDate = birthDate;
+	public LocalDate getBithday() {
+		return bithday;
 	}
 
-	public LocalDate getBirthDate() {
-		return this.birthDate;
+	public void setBithday(LocalDate bithday) {
+		this.bithday = bithday;
 	}
 
-	public String getHometown() {
-		return this.hometown;
+	public String getPhonenumber() {
+		return phonenumber;
 	}
 
-	public void setHometown(String hometown) {
-		this.hometown = hometown;
+	public void setPhonenumber(String phonenumber) {
+		this.phonenumber = phonenumber;
 	}
 
 	public String getAcademy() {
@@ -100,22 +109,13 @@ public class Student implements Serializable {
 		this.academy = academy;
 	}
 
-	public String getStudentnumber() {
-		return this.studentnumber;
-	}
-
-	public void setStudentnumber(String studentnumber) {
-		this.studentnumber = studentnumber;
-	}
-
 	@Override
 	public String toString() {
 		return new ToStringCreator(this)
 
-				.append("id", this.getId()).append("new", this.isNew()).append("stuname", this.getStuname())
-				.append("gender", this.getGender()).append("birthdate", this.birthDate)
-				.append("hometown", this.hometown).append("academy", this.academy)
-				.append("studentnumber", this.studentnumber).toString();
+				.append("id", this.getId()).append("new", this.isNew()).append("name", this.getName())
+				.append("gender", this.getGender()).append("birthdate", this.bithday)
+				.append("phonenumber", this.phonenumber).append("academy", this.academy).toString();
 	}
 
 }

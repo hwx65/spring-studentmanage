@@ -62,24 +62,11 @@ class StudentController {
 	public String processFindForm(Student student, BindingResult result, Map<String, Object> model) {
 
 		// allow parameterless GET request for /students to return all records
-		if (student.getStuname() == null) {
-			student.setStuname(""); // empty string signifies broadest possible search
+		if (student.getName() == null) {
+			student.setName(""); // empty string signifies broadest possible search
 		}
 
-		if (student.getGender() == null) {
-			student.setGender(""); // empty string signifies broadest possible search
-		}
-
-		if (student.getHometown() == null) {
-			student.setHometown(""); // empty string signifies broadest possible search
-		}
-
-		if (student.getAcademy() == null) {
-			student.setAcademy(""); // empty string signifies broadest possible search
-		}
-
-		Collection<Student> results = this.students.findStudent(student.getStuname(), student.getGender(),
-				student.getHometown(), student.getAcademy());
+		Collection<Student> results = this.students.findByName(student.getName());
 		if (results.isEmpty()) {
 			// no students found
 			result.rejectValue("stuname", "notFound", "not found");

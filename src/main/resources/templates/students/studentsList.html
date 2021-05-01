@@ -20,13 +20,12 @@
     <tbody>
       <tr th:each="student : ${selections}">
         <td>
-          <a th:href="@{/students/__${student.id}__}" th:text="${student.stuname}" /></a>
+          <a th:href="@{/students/__${student.id}__}" th:text="${student.name}" /></a>
         </td>
         <td th:text="${student.gender}" />
-        <td th:text="${student.birthDate}" />
-        <td th:text="${student.hometown}" />
+        <td th:text="${student.birthday}" />
+        <td th:text="${student.phonenumber}" />
         <td th:text="${student.academy}" />
-        <td th:text="${student.studentnumber}" />
       </tr>
     </tbody>
   </table>

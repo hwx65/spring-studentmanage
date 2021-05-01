@@ -4,11 +4,11 @@
   <groupId>org.springframework.samples</groupId>
   <artifactId>spring-studentmanage</artifactId>
   <version>2.2.0.BUILD-SNAPSHOT</version>
-
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.2.4.RELEASE</version>
+    <version>2.4.2</version>
+    <relativePath/> <!-- lookup parent from repository -->
   </parent>
   <name>studentmanage</name>
 
@@ -50,6 +50,10 @@
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-validation</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-thymeleaf</artifactId>
     </dependency>
     <dependency>
@@ -66,8 +70,8 @@
 
     <!-- Databases - Uses HSQL by default -->
     <dependency>
-      <groupId>org.hsqldb</groupId>
-      <artifactId>hsqldb</artifactId>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
       <scope>runtime</scope>
     </dependency>
     <dependency>
@@ -125,6 +129,26 @@
       <artifactId>spring-boot-devtools</artifactId>
       <optional>true</optional>
     </dependency>
+    <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-batch</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.batch</groupId>
+			<artifactId>spring-batch-test</artifactId>
+			<scope>test</scope>
+		</dependency>
   </dependencies>
 
   <build>
@@ -270,20 +294,8 @@
             <artifactId>mockito-core</artifactId>
             <version>${mockito.version}</version>
           </dependency>
+
         </dependencies>
-      </plugin>
-      <plugin>
-        <groupId>com.google.cloud.tools</groupId>
-        <artifactId>jib-maven-plugin</artifactId>
-        <version>2.1.0</version>
-        <configuration>
-          <from>
-            <image>openjdk</image>
-          </from>
-          <to>
-              <image>studentmanage</image>
-          </to>
-        </configuration>
       </plugin>
     </plugins>
   </build>

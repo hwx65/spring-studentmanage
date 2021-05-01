@@ -11,7 +11,7 @@
   <table class="table table-striped" th:object="${student}">
     <tr>
       <th>Name</th>
-      <td><b th:text="*{stuname}"></b></td>
+      <td><b th:text="*{name}"></b></td>
     </tr>
     <tr>
       <th>Gender</th>
@@ -20,22 +20,17 @@
     </tr>
     <tr>
       <th>Birth Date</th>
-      <td th:text="*{birthDate}" />
+      <td th:text="*{birthday}" />
       </dd>
     </tr>
     <tr>
       <th>Hometown</th>
-      <td th:text="*{hometown}" />
+      <td th:text="*{phonenumber}" />
       </td>
     </tr>
     <tr>
       <th>Academy</th>
       <td th:text="*{academy}" />
-      </td>
-    </tr>
-    <tr>
-      <th>Studentnumber</th>
-      <td th:text="*{studentnumber}" />
       </td>
     </tr>
   </table>
