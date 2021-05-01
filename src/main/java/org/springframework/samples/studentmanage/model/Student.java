@@ -6,8 +6,6 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -22,14 +20,14 @@ public class Student implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Integer id;
 
 	public Student(int id, String name, String gender, Date birthday, String phonenumber, String acaedmy) {
 		this.id = id;
 		this.name = name;
 		this.gender = gender;
-		this.setBithday(bithday);
+		this.birthday = birthday.toLocalDate();
 		this.phonenumber = phonenumber;
 		this.academy = acaedmy;
 	}
@@ -59,7 +57,7 @@ public class Student implements Serializable {
 
 	@Column(name = "birthday")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate bithday;
+	private LocalDate birthday;
 
 	@Column(name = "phonenumber")
 	@NotEmpty
@@ -85,12 +83,12 @@ public class Student implements Serializable {
 		this.gender = gender;
 	}
 
-	public LocalDate getBithday() {
-		return bithday;
+	public LocalDate getBirthday() {
+		return birthday;
 	}
 
-	public void setBithday(LocalDate bithday) {
-		this.bithday = bithday;
+	public void setBirthday(LocalDate birthday) {
+		this.birthday = birthday;
 	}
 
 	public String getPhonenumber() {
@@ -114,7 +112,7 @@ public class Student implements Serializable {
 		return new ToStringCreator(this)
 
 				.append("id", this.getId()).append("new", this.isNew()).append("name", this.getName())
-				.append("gender", this.getGender()).append("birthdate", this.bithday)
+				.append("gender", this.getGender()).append("birthday", this.birthday)
 				.append("phonenumber", this.phonenumber).append("academy", this.academy).toString();
 	}
 

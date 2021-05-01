@@ -1,6 +1,5 @@
 package org.springframework.samples.studentmanage.batchprocessing;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.BatchStatus;
@@ -25,18 +24,15 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
 
 	@Override
 	public void afterJob(JobExecution jobExecution) {
-		if(jobExecution.getStatus() == BatchStatus.COMPLETED) {
+		if (jobExecution.getStatus() == BatchStatus.COMPLETED) {
 			log.info("!!! JOB FINISHED! Time to verify the results");
 
-			jdbcTemplate.query("SELECT id, name, gender, birthday, phonenumber, academy FROM people",
-				(rs, row) -> new Student(
-					rs.getInt(1),
-					rs.getString(2),
-					rs.getString(3),
-					rs.getDate(4),
-					rs.getString(5),
-					rs.getString(6))
-			).forEach(Student -> log.info("Found <" + Student + "> in the database."));
+			jdbcTemplate
+					.query("SELECT id, name, gender, birthday, phonenumber, academy FROM people",
+							(rs, row) -> new Student(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(4),
+									rs.getString(5), rs.getString(6)))
+					.forEach(Student -> log.info("Found <" + Student + "> in the database."));
 		}
 	}
+
 }

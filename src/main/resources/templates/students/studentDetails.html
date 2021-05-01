@@ -10,6 +10,10 @@
 
   <table class="table table-striped" th:object="${student}">
     <tr>
+      <th>Id</th>
+      <td><b th:text="*{id}"></b></td>
+    </tr>
+    <tr>
       <th>Name</th>
       <td><b th:text="*{name}"></b></td>
     </tr>

@@ -8,4 +8,4 @@ CREATE TABLE students (
   phonenumber    VARCHAR(255),
   academy       VARCHAR(80)
 );
-CREATE INDEX students_stuname ON students (stuname);
+CREATE INDEX students_name ON students (name);

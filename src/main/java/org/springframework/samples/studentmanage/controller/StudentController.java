@@ -29,10 +29,10 @@ class StudentController {
 		// this.visits = visits;
 	}
 
-	@InitBinder
-	public void setAllowedFields(WebDataBinder dataBinder) {
-		dataBinder.setDisallowedFields("id");
-	}
+	// @InitBinder
+	// public void setAllowedFields(WebDataBinder dataBinder) {
+	// dataBinder.setDisallowedFields("id");
+	// }
 
 	@GetMapping("/students/new")
 	public String initCreationForm(Map<String, Object> model) {
@@ -69,7 +69,7 @@ class StudentController {
 		Collection<Student> results = this.students.findByName(student.getName());
 		if (results.isEmpty()) {
 			// no students found
-			result.rejectValue("stuname", "notFound", "not found");
+			result.rejectValue("name", "notFound", "not found");
 			return "students/findStudents";
 		}
 		else if (results.size() == 1) {
