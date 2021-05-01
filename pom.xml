@@ -130,9 +130,9 @@
       <optional>true</optional>
     </dependency>
     <dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-batch</artifactId>
-		</dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-batch</artifactId>
+	</dependency>
 
 		<dependency>
 			<groupId>org.hsqldb</groupId>
@@ -149,11 +149,23 @@
 			<artifactId>spring-batch-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-      <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-csv</artifactId>
-      <version>1.7</version>
-    </dependency>
+	  <dependency>
+		<groupId>org.springframework.batch.extensions</groupId>
+		<artifactId>spring-batch-excel</artifactId>
+		<version>0.1.0-SNAPSHOT</version>
+		<scope>system</scope>
+		<systemPath>${project.basedir}/lib/spring-batch-excel-0.1.0-SNAPSHOT.jar</systemPath>
+	</dependency>
+	<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>5.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>5.0.0</version>
+		</dependency>
 
   </dependencies>
 

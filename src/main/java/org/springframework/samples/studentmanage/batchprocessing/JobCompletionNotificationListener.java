@@ -28,9 +28,8 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
 			log.info("!!! JOB FINISHED! Time to verify the results");
 
 			jdbcTemplate
-					.query("SELECT id, name, gender, birthday, phonenumber, academy FROM people",
-							(rs, row) -> new Student(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(4),
-									rs.getString(5), rs.getString(6)))
+					.query("SELECT id, name, gender, birthday, phonenumber, academy FROM students",
+							(rs, row) -> new Student())
 					.forEach(Student -> log.info("Found <" + Student + "> in the database."));
 		}
 	}

@@ -1,10 +1,10 @@
 DROP TABLE Student IF EXISTS;
 
 CREATE TABLE students (
-  id         INTEGER IDENTITY PRIMARY KEY,
+  id         VARCHAR(30) IDENTITY PRIMARY KEY,
   name  VARCHAR(30),
   gender  VARCHAR(8),
-  birthday DATE,
+  birthday VARCHAR(30),
   phonenumber    VARCHAR(255),
   academy       VARCHAR(80)
 );

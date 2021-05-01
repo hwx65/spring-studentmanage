@@ -1,8 +1,6 @@
 package org.springframework.samples.studentmanage.model;
 
 import java.io.Serializable;
-import java.sql.Date;
-import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,25 +19,16 @@ public class Student implements Serializable {
 
 	@Id
 	@Column(name = "id")
-	private Integer id;
-
-	public Student(int id, String name, String gender, Date birthday, String phonenumber, String acaedmy) {
-		this.id = id;
-		this.name = name;
-		this.gender = gender;
-		this.birthday = birthday.toLocalDate();
-		this.phonenumber = phonenumber;
-		this.academy = acaedmy;
-	}
+	private String id;
 
 	public Student() {
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -57,7 +46,7 @@ public class Student implements Serializable {
 
 	@Column(name = "birthday")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate birthday;
+	private String birthday;
 
 	@Column(name = "phonenumber")
 	@NotEmpty
@@ -83,11 +72,11 @@ public class Student implements Serializable {
 		this.gender = gender;
 	}
 
-	public LocalDate getBirthday() {
+	public String getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(LocalDate birthday) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 

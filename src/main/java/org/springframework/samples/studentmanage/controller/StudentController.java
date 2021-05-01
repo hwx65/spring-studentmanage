@@ -85,7 +85,7 @@ class StudentController {
 	}
 
 	@GetMapping("/students/{studentId}/edit")
-	public String initUpdateStudentForm(@PathVariable("studentId") int studentId, Model model) {
+	public String initUpdateStudentForm(@PathVariable("studentId") String studentId, Model model) {
 		Student student = this.students.findById(studentId);
 		model.addAttribute(student);
 		return VIEWS_STUDENT_CREATE_OR_UPDATE_FORM;
@@ -93,7 +93,7 @@ class StudentController {
 
 	@PostMapping("/students/{studentId}/edit")
 	public String processUpdateStudentForm(@Valid Student student, BindingResult result,
-			@PathVariable("studentId") int studentId) {
+			@PathVariable("studentId") String studentId) {
 		if (result.hasErrors()) {
 			return VIEWS_STUDENT_CREATE_OR_UPDATE_FORM;
 		}
@@ -105,7 +105,7 @@ class StudentController {
 	}
 
 	@GetMapping("/students/{studentId}/delete")
-	public String initDeleteStudentForm(@PathVariable("studentId") int studentId, Model model) {
+	public String initDeleteStudentForm(@PathVariable("studentId") String studentId, Model model) {
 		Student student = this.students.findById(studentId);
 		this.students.delete(student);
 		return "redirect:/students/";
@@ -117,7 +117,7 @@ class StudentController {
 	 * @return a ModelMap with the model attributes for the view
 	 */
 	@GetMapping("/students/{studentId}")
-	public ModelAndView showStudent(@PathVariable("studentId") int studentId) {
+	public ModelAndView showStudent(@PathVariable("studentId") String studentId) {
 		ModelAndView mav = new ModelAndView("students/studentDetails");
 		Student student = this.students.findById(studentId);
 		mav.addObject(student);

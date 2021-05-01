@@ -1,6 +1,5 @@
 package org.springframework.samples.studentmanage.batchprocessing;
 
-import javax.sound.sampled.AudioFormat.Encoding;
 import javax.sql.DataSource;
 
 import org.springframework.batch.core.Job;
@@ -9,10 +8,10 @@ import org.springframework.batch.core.configuration.annotation.EnableBatchProces
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
+import org.springframework.batch.item.ItemStreamReader;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilder;
-import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +35,7 @@ public class BatchConfiguration {
 
 	// tag::readerwriterprocessor[]
 	@Bean
-	public FlatFileItemReader<Student> reader() {
+	public ItemStreamReader<Student> reader() {
 		return new FlatFileItemReaderBuilder<Student>().name("StudentItemReader")
 				.resource(new ClassPathResource("student-info.csv")).delimited()
 				.names("id", "name", "academy", "phonenumber", "gender", "birthday")
