@@ -55,7 +55,7 @@
 
 在本次实验中，因为文件中的数据缺少性别和出生日期等信息，所以我在表格中，对这两个信息进行了随机补充，最后访问 http://localhost:8080/students/ 可以看到如下结果：
 
-![](D:\spring\spring-studentmanage\students.png)
+![](students.png)
 
 
 
